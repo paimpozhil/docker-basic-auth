@@ -31,7 +31,22 @@ Or edit your /etc/default/docker or your docker config file to include this
 
 *DOCKER_OPTS=" -H tcp://172.17.42.1:4243 -H unix:///var/run/docker.sock"*
 
+Replace the "172.17.42.1" with your docker bridge IP 
+
+To find out if you have a different one use the ifconfig.
+```
+root@cloud-server-01:~/docker-basic-auth# ifconfig
+docker0   Link encap:Ethernet  HWaddr 56:84:7a:fe:97:99
+          inet addr:*172.17.42.1*  Bcast:0.0.0.0  Mask:255.255.0.0
+```
+
 ## Dockerize
+
+```
+## Just run it
+CID=`docker run -td -p 4244:4244 paimpozhil/docker-basic-auth`
+docker logs $CID
+```
 
 ```
 # Build & RUN 
@@ -42,17 +57,18 @@ CID=`docker run -td -p 4244:4244 dockerauth`
 docker logs $CID
 ```
 
-```
-## Just run it
-CID=`docker run -td -p 4244:4244 paimpozhil/docker-basic-auth`
-docker logs $CID
-```
-
 Now connect with your docker client with the login info  displayed here over the port 4244 .
 
+## This is not so secure.
 
-## This is not entirely secure.
+This setup is ONLY slightly better than opening the docker api to the world by listening on 0.0.0.0.
 
-Anyone can connect & use your docker at the host via any of your containers within the docker host which has access to this port 4243
+Because all your other containers can access the dockerhost api via 4243 port and the authentication happens over plaintext so anyone with tools like wireshark can see your password over network.
 
+You may easily add HTTPS on top of this image by just adding certs/ssl to the Nginx image which is trivial.
+
+
+## Need support?
+
+### http://dockerteam.com
 
