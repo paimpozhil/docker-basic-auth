@@ -31,7 +31,7 @@ Or edit your /etc/default/docker or your docker config file to include this
 
 *DOCKER_OPTS=" -H tcp://172.17.42.1:4243 -H unix:///var/run/docker.sock"*
 
-Replace the "172.17.42.1" with your docker bridge IP 
+Replace the default "172.17.42.1"  docker bridge IP if your system has a different  ip address for docker interface.
 
 To find out if you have a different one use the ifconfig.
 ```
