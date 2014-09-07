@@ -67,6 +67,12 @@ Because all your other containers can access the dockerhost api via 4243 port an
 
 You may easily add HTTPS on top of this image by just adding certs/ssl to the Nginx image which is trivial.
 
+#To DO
+
+Make this image generic so we can reverse proxy with authentication to any open system.
+
+Its not a lot of work.
+
 
 ## Need support?
 
